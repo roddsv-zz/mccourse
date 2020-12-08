@@ -2,6 +2,11 @@ package com.rodrigo.mccourse.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 //As classes de domínio devem todas ficar no pacote 'domain';
 
 /*Para se criar uma classe de domínio devemos seguir os passos:
@@ -14,10 +19,14 @@ import java.io.Serializable;
  6. Serializable (padrão: 1L) - interface que permite à classe ter os seus objetos convetidos em uma sequência de bytes.
  */
 
+@Entity //especifica que a classe é uma entidade.
 public class Category implements Serializable{
 
 	
 	private static final long serialVersionUID = 1L;
+	
+	@Id //usa o id como chave no banco
+	@GeneratedValue(strategy=GenerationType.IDENTITY) //definição de geração automática de id's das categorias.
 	private Integer id;
 	private String name;
 
