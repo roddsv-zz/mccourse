@@ -1,11 +1,14 @@
 package com.rodrigo.mccourse.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 //As classes de domínio devem todas ficar no pacote 'domain';
 
@@ -29,8 +32,13 @@ public class Category implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY) //definição de geração automática de id's das categorias.
 	private Integer id;
 	private String name;
+	
+	@ManyToMany(mappedBy="categories")	
+	private List<Product> products = new ArrayList<>();
+	
+	/*A lista de produtos deve ser colocada na categoria a fim de gerar as associações, e vice-versa.*/
 
-	public Category() {}
+	public Category(){}
 
 	public Category(Integer id, String name) {
 		super();
@@ -52,6 +60,14 @@ public class Category implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 
 	@Override
@@ -78,10 +94,4 @@ public class Category implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
 }
